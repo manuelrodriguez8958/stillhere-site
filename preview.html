@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Still Here — App Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#050508;
+  --rose:#c03040;
+  --text:#eeeaf4;
+  --muted:#7a7890;
+  --hint:#3a3650;
+  --card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 32px;
+  background:rgba(5,5,8,0.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;text-decoration:none;color:var(--text);}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+
+.hero{
+  padding:120px 24px 60px;text-align:center;
+}
+.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--rose);text-transform:uppercase;margin-bottom:20px;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,80px);font-weight:300;line-height:1;margin-bottom:16px;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:400px;margin:0 auto;line-height:1.8;}
+
+/* SCREENS SHOWCASE */
+.showcase{
+  padding:60px 24px 100px;
+  max-width:1100px;margin:0 auto;
+}
+
+/* featured screen */
+.featured{
+  display:flex;gap:60px;align-items:center;
+  margin-bottom:80px;padding-bottom:80px;
+  border-bottom:1px solid var(--border);
+}
+.featured:nth-child(even){flex-direction:row-reverse;}
+@media(max-width:700px){
+  .featured,.featured:nth-child(even){flex-direction:column;gap:32px;}
+}
+.featured-phone{
+  flex-shrink:0;width:240px;
+  position:relative;
+}
+.featured-phone img{
+  width:100%;border-radius:40px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.06);
+  display:block;
+}
+.featured-content{flex:1;}
+.feat-num{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;
+  color:var(--rose);text-transform:uppercase;margin-bottom:16px;
+}
+.feat-title{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);
+  font-weight:300;line-height:1.1;margin-bottom:16px;
+}
+.feat-title em{font-style:italic;color:var(--rose);}
+.feat-desc{font-size:14px;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:24px;}
+.feat-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.feat-tag{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:var(--hint);border:1px solid var(--border);
+  padding:5px 10px;text-transform:uppercase;
+}
+
+/* CTA */
+.cta-section{
+  text-align:center;padding:80px 24px;
+  border-top:1px solid var(--border);
+}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,56px);font-weight:300;margin-bottom:16px;}
+.cta-sub{font-size:14px;color:var(--muted);margin-bottom:40px;}
+.cta-btn{
+  display:inline-block;background:var(--rose);color:#fff;
+  padding:15px 36px;font-family:'DM Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  text-decoration:none;transition:opacity 0.2s;border-radius:3px;
+}
+.cta-btn:hover{opacity:0.8;}
+
+footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border);}
+.footer-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--hint);text-transform:uppercase;text-decoration:none;}
+.footer-copy{font-size:11px;color:var(--hint);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="app.html" class="nav-logo">Still Here</a>
+  <div class="nav-links">
+    <a href="app.html">Home</a>
+    <a href="preview.html" class="active">Preview</a>
+    <a href="index.html">Privacy</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">App Preview</div>
+  <h1 class="hero-title">See what it looks like.</h1>
+  <p class="hero-sub">Dark. Simple. Built for the way people actually live.</p>
+</div>
+
+<div class="showcase">
+
+  <!-- Screen 1: Home -->
+  <div class="featured">
+    <div class="featured-phone">
+      <img src="screen1.png" alt="Still Here home screen"/>
+    </div>
+    <div class="featured-content">
+      <div class="feat-num">01 — Home</div>
+      <h2 class="feat-title">One tap.<br/><em>That's all.</em></h2>
+      <p class="feat-desc">The home screen shows a live countdown to 23:59. Your contacts, location, and farewell settings are all one tap away. Check in. Go about your day.</p>
+      <div class="feat-tags">
+        <span class="feat-tag">Live countdown</span>
+        <span class="feat-tag">Daily check-in</span>
+        <span class="feat-tag">Quick settings</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2: Contacts -->
+  <div class="featured">
+    <div class="featured-phone">
+      <img src="screen2.png" alt="Emergency contacts screen"/>
+    </div>
+    <div class="featured-content">
+      <div class="feat-num">02 — Contacts</div>
+      <h2 class="feat-title">Your people.<br/><em>In order.</em></h2>
+      <p class="feat-desc">Add unlimited emergency contacts. Priority 1 contacts are reached first on Day 2. Everyone is contacted on Day 3. Record a voice message that plays on the automated call.</p>
+      <div class="feat-tags">
+        <span class="feat-tag">Priority ordering</span>
+        <span class="feat-tag">Voice recording</span>
+        <span class="feat-tag">SMS escalation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 3: Location -->
+  <div class="featured">
+    <div class="featured-phone">
+      <img src="screen3.png" alt="My location screen"/>
+    </div>
+    <div class="featured-content">
+      <div class="feat-num">03 — Location</div>
+      <h2 class="feat-title">Shared only<br/><em>when it matters.</em></h2>
+      <p class="feat-desc">Enter your home address. It's encrypted, stored securely, and only sent to your contacts on Day 3. Never before. Never sold. The SMS preview shows exactly what they'll receive.</p>
+      <div class="feat-tags">
+        <span class="feat-tag">Day 3 only</span>
+        <span class="feat-tag">SMS preview</span>
+        <span class="feat-tag">Encrypted</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 4: Farewell -->
+  <div class="featured">
+    <div class="featured-phone">
+      <img src="screen4.png" alt="Farewell screen"/>
+    </div>
+    <div class="featured-content">
+      <div class="feat-num">04 — Farewell</div>
+      <h2 class="feat-title">Leave something<br/><em>behind.</em></h2>
+      <p class="feat-desc">Ceremony type. Ashes preference. An obituary note. A song. A memorial photo. The things you'd want people to know — written down, saved, and sent to the right people when the time comes.</p>
+      <div class="feat-tags">
+        <span class="feat-tag">Ceremony wishes</span>
+        <span class="feat-tag">Memorial photo</span>
+        <span class="feat-tag">Music upload</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cta-section">
+  <div class="cta-title">Ready to check in?</div>
+  <p class="cta-sub">$13.99 once. No subscription. No ads.</p>
+  <a href="https://apps.apple.com/au/app/still-here" class="cta-btn" target="_blank">Download on the App Store</a>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="app.html">Home</a>
+    <a href="index.html">Privacy Policy</a>
+    <a href="index.html">Terms of Service</a>
+    <a href="mailto:stillhereapp.daily@gmail.com">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Still Here. Made in Melbourne.</div>
+</footer>
+
+</body>
+</html>
