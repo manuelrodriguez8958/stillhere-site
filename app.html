@@ -1,7 +1,326 @@
-<html>
-<head><title>301 Moved Permanently</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Still Here — Daily Check-in App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#050508;
+  --rose:#c03040;
+  --text:#eeeaf4;
+  --muted:#7a7890;
+  --hint:#3a3650;
+  --card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:80px 24px;text-align:center;position:relative;
+}
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;
+  color:var(--rose);text-transform:uppercase;margin-bottom:32px;
+  opacity:0;animation:fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(72px,16vw,156px);
+  font-weight:300;line-height:0.88;letter-spacing:-3px;
+  margin-bottom:28px;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards;
+}
+.hero-title em{font-style:italic;color:var(--rose);}
+.hero-sub{
+  font-size:15px;color:var(--muted);line-height:1.9;max-width:360px;
+  margin-bottom:48px;font-weight:300;
+  opacity:0;animation:fadeUp 0.8s ease 0.6s forwards;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--rose);color:#fff;
+  padding:15px 32px;border-radius:3px;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  font-family:'DM Mono',monospace;text-decoration:none;
+  transition:opacity 0.2s;
+  opacity:0;animation:fadeUp 0.8s ease 0.8s forwards;
+}
+.hero-cta:hover{opacity:0.8;}
+.hero-scroll{
+  position:absolute;bottom:36px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--hint);text-transform:uppercase;
+  opacity:0;animation:fadeUp 0.8s ease 1.2s forwards;
+}
+.hero-drop{
+  position:absolute;right:6%;top:50%;transform:translateY(-50%);
+  pointer-events:none;
+  opacity:0;animation:fadeBlood 2s ease 1s forwards;
+}
+@keyframes fadeBlood{to{opacity:0.055;}}
+
+hr.divider{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
+
+/* WHY section */
+.why{padding:110px 24px;max-width:860px;margin:0 auto;}
+.section-label{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:4px;
+  color:var(--rose);text-transform:uppercase;margin-bottom:48px;
+}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px 64px;}
+@media(max-width:620px){.why-grid{grid-template-columns:1fr;gap:36px;}}
+.why-block{}
+.why-num{
+  font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;
+  color:var(--hint);line-height:1;margin-bottom:12px;
+}
+.why-title{
+  font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;
+  margin-bottom:10px;line-height:1.3;
+}
+.why-desc{font-size:13px;color:var(--muted);line-height:1.9;font-weight:300;}
+
+/* STAT ROW */
+.stats{
+  padding:80px 24px;max-width:860px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+@media(max-width:500px){.stats{grid-template-columns:1fr;}}
+.stat{background:var(--bg);padding:36px 24px;text-align:center;}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;
+  color:var(--rose);line-height:1;margin-bottom:8px;
+}
+.stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+
+/* ESCALATION */
+.section{padding:100px 24px;max-width:860px;margin:0 auto;}
+.esc-row{
+  display:flex;gap:28px;align-items:flex-start;
+  padding:36px 0;border-bottom:1px solid var(--border);
+  opacity:0;transform:translateX(-16px);
+  transition:opacity 0.5s ease,transform 0.5s ease;
+}
+.esc-row.visible{opacity:1;transform:none;}
+.esc-row:last-child{border-bottom:none;}
+.esc-day{
+  font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;
+  color:var(--hint);line-height:1;min-width:56px;
+  transition:color 0.3s;
+}
+.esc-row:hover .esc-day{color:var(--rose);}
+.esc-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;margin-bottom:8px;}
+.esc-desc{font-size:13px;color:var(--muted);line-height:1.9;font-weight:300;}
+
+/* FEATURES */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;
+  background:var(--border);border:1px solid var(--border);
+}
+.feat-cell{background:var(--bg);padding:28px 22px;transition:background 0.2s;}
+.feat-cell:hover{background:var(--card);}
+.feat-ico{font-size:18px;margin-bottom:10px;}
+.feat-name{font-size:13px;color:var(--text);margin-bottom:4px;}
+.feat-desc{font-size:11px;color:var(--muted);line-height:1.7;}
+
+/* MANIFESTO */
+.manifesto{padding:120px 24px;text-align:center;max-width:680px;margin:0 auto;}
+.manifesto-quote{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4.5vw,48px);
+  font-weight:300;font-style:italic;line-height:1.35;margin-bottom:20px;
+}
+.manifesto-attr{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--hint);text-transform:uppercase;}
+
+/* PRICING */
+.pricing{padding:100px 24px;max-width:480px;margin:0 auto;text-align:center;}
+.price-card{border:1px solid var(--border);padding:48px 32px;position:relative;overflow:hidden;}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent);}
+.price-amount{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;line-height:1;margin-bottom:4px;}
+.price-amount sup{font-size:30px;vertical-align:top;margin-top:14px;}
+.price-once{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:32px;}
+.price-features{list-style:none;text-align:left;margin-bottom:40px;}
+.price-features li{font-size:13px;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;}
+.price-features li::before{content:'—';color:var(--rose);}
+.price-btn{display:block;width:100%;padding:16px;background:var(--rose);color:#fff;border:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:opacity 0.2s;}
+.price-btn:hover{opacity:0.8;}
+.price-iap{font-size:11px;color:var(--hint);margin-top:14px;line-height:1.6;}
+
+/* FOOTER */
+footer{padding:60px 24px;text-align:center;border-top:1px solid var(--border);}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;font-style:italic;margin-bottom:16px;}
+.footer-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--hint);text-transform:uppercase;text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--muted);}
+.footer-copy{font-size:11px;color:var(--hint);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:600px){.hero-drop{display:none;}.stats{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
 <body>
-<center><h1>301 Moved Permanently</h1></center>
-<hr><center>nginx</center>
+
+<section class="hero">
+  <svg class="hero-drop" width="280" height="380" viewBox="0 0 340 460">
+    <path d="M170 40C170 40 60 180 55 280C50 360 105 420 170 422C235 420 290 360 285 280C280 180 170 40 170 40Z" fill="#c03040"/>
+    <path d="M170 40C170 40 168 30 168 18C168 8 169 2 170 0C171 2 172 8 172 18C172 30 170 40 170 40Z" fill="#c03040"/>
+  </svg>
+  <div class="hero-eyebrow">iOS · Melbourne · 2026</div>
+  <h1 class="hero-title">Still<br/><em>Here.</em></h1>
+  <p class="hero-sub">A daily check-in for people who live alone, travel solo, or just want someone to know they're okay.</p>
+  <a href="#pricing" class="hero-cta">Download on the App Store</a>
+  <div class="hero-scroll">scroll ↓</div>
+</section>
+
+<hr class="divider"/>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-label">Why we built this</div>
+  <div class="why-grid">
+    <div class="why-block">
+      <div class="why-num">01</div>
+      <div class="why-title">Young people live alone now</div>
+      <div class="why-desc">More Australians under 35 live alone than ever before. Share houses dissolve. Cities are big. No one automatically notices when you go quiet.</div>
+    </div>
+    <div class="why-block">
+      <div class="why-num">02</div>
+      <div class="why-title">Older adults deserve independence</div>
+      <div class="why-desc">Your parents or grandparents shouldn't have to move in with someone just to feel safe. Still Here lets them stay independent without anyone worrying.</div>
+    </div>
+    <div class="why-block">
+      <div class="why-num">03</div>
+      <div class="why-title">Existing apps are cold and clinical</div>
+      <div class="why-desc">Medical alert buttons. GPS trackers. Surveillance dressed up as care. We wanted something that felt human — a quiet daily ritual, not a device strapped to your wrist.</div>
+    </div>
+    <div class="why-block">
+      <div class="why-num">04</div>
+      <div class="why-title">One tap. That's all it takes.</div>
+      <div class="why-desc">We built Still Here because we believe the simplest things matter most. Check in. Let someone know. Go about your day. It's enough.</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">1 in 4</div>
+    <div class="stat-label">Australians live alone</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">72h</div>
+    <div class="stat-label">Average time before someone is missed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">23:59</div>
+    <div class="stat-label">Your daily deadline</div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-label">How it works</div>
+  <div class="escalation">
+    <div class="esc-row">
+      <div class="esc-day">23<br/><span style="font-size:32px;">59</span></div>
+      <div>
+        <div class="esc-title">Check in. Every day.</div>
+        <div class="esc-desc">Tap once before midnight. The clock resets. You're still here.</div>
+      </div>
+    </div>
+    <div class="esc-row">
+      <div class="esc-day">01</div>
+      <div>
+        <div class="esc-title">Day 1 — a reminder</div>
+        <div class="esc-desc">You missed your check-in. A reminder is sent to you. No drama yet.</div>
+      </div>
+    </div>
+    <div class="esc-row">
+      <div class="esc-day">02</div>
+      <div>
+        <div class="esc-title">Day 2 — your person gets a message</div>
+        <div class="esc-desc">Your priority contact receives an SMS asking them to reach out. Quietly. Privately.</div>
+      </div>
+    </div>
+    <div class="esc-row">
+      <div class="esc-day" style="color:var(--rose);">03</div>
+      <div>
+        <div class="esc-title">Day 3 — everyone knows</div>
+        <div class="esc-desc">All contacts receive your address and are asked to call 000. This is the last resort. We hope it never gets here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-label" style="text-align:center;margin-bottom:40px;">Everything included</div>
+  <div class="feat-grid">
+    <div class="feat-cell"><div class="feat-ico">⏱️</div><div class="feat-name">23:59 deadline</div><div class="feat-desc">Live countdown. Every day.</div></div>
+    <div class="feat-cell"><div class="feat-ico">👥</div><div class="feat-name">Unlimited contacts</div><div class="feat-desc">Priority ordering. SMS escalation.</div></div>
+    <div class="feat-cell"><div class="feat-ico">📍</div><div class="feat-name">Location on Day 3</div><div class="feat-desc">Your address. Only then. Never before.</div></div>
+    <div class="feat-cell"><div class="feat-ico">🕯️</div><div class="feat-name">Farewell page</div><div class="feat-desc">Ceremony wishes. Obituary. Memorial photo.</div></div>
+    <div class="feat-cell"><div class="feat-ico">🎙️</div><div class="feat-name">Voice message</div><div class="feat-desc">Record something. In your own voice.</div></div>
+    <div class="feat-cell"><div class="feat-ico">☠️</div><div class="feat-name">Wanted frame</div><div class="feat-desc">Old West memorial poster. $2.99 add-on.</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-quote">"Someone should always know you're okay."</div>
+  <div class="manifesto-attr">— Still Here, Melbourne 2026</div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label" style="text-align:center;margin-bottom:40px;">One price. Forever.</div>
+  <div class="price-card">
+    <div class="price-amount"><sup>$</sup>13.99</div>
+    <div class="price-once">One-time · No subscription · No ads · Ever</div>
+    <ul class="price-features">
+      <li>Daily check-in with 3-day escalation</li>
+      <li>Unlimited emergency contacts</li>
+      <li>Automatic SMS alerts</li>
+      <li>Farewell page &amp; memorial tools</li>
+      <li>Voice recording</li>
+      <li>All frames included</li>
+    </ul>
+    <a href="#" class="price-btn">Download on the App Store</a>
+    <div class="price-iap">The only in-app purchase is the Wanted ☠️ frame — $2.99 once.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Still Here</div>
+  <div class="footer-links">
+    <a href="index.html">Privacy Policy</a>
+    <a href="index.html">Terms of Service</a>
+    <a href="mailto:stillhereapp.daily@gmail.com">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Still Here. Made in Melbourne.</div>
+</footer>
+
+<script>
+const rows = document.querySelectorAll('.esc-row');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*120);
+  });
+},{threshold:0.15});
+rows.forEach(r=>obs.observe(r));
+</script>
 </body>
 </html>
